@@ -1,8 +1,2 @@
-chaussette,Nathalie
-matteo,MonMotDePasse
-test,testeur
-didou,marseille
-leandro,js
-testeur,testadmin
-livonia,bonjour
-malorie,fg
+user1,password1
+example1,password2
