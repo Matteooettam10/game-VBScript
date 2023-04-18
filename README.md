@@ -8,13 +8,10 @@ it's the "game.vbs" file
 removed the contents of the files "users.txt" and "results.txt
 
 # installs
----
 
 	windows + r.
   
 in what has just opened wrote 
-
----
 
 	cmd
 
