@@ -1,0 +1,8 @@
+chaussette,Nathalie
+matteo,MonMotDePasse
+test,testeur
+didou,marseille
+leandro,js
+testeur,testadmin
+livonia,bonjour
+malorie,fg

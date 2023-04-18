@@ -1,0 +1,15 @@
+Quel est le nom de la capitale de la France ?|Paris
+Quelle est la couleur du ciel ?|Bleu
+Combien y a-t-il de jours dans une annee bissextile ?|366
+Quelle est la plus grande planete du systeme solaire ?|Jupiter
+Quel est le plus grand ocean du monde ?|Pacifique
+Quelle est la plus haute montagne du monde ?|Everest
+Qui a peint la Joconde ?|Leonardo da Vinci
+es-que matteo est intelligent|oui
+Combien de rayures y a-t-il sur le drapeau americain|13
+Quel est l animal national de l Australie ?|kangourou
+En combien de jours la Terre tourne-t-elle autour du Soleil|365
+Lequel des empires suivants n avait pas de langue ecrite : l’inca, l’aztèque, l’égyptien, le romain ?|l’inca
+En quelle annee le premier numero de Vogue a-t-il ete publie : 1892, 1960, 2000 ?|1892
+Quelle equipe de football est-elle connue sous le nom des « Diables rouges » ?|Manchester United
+En quelle annee Netflix a-t-il ete cree : 1997, 2001, 2009, 2015 ?|1997
