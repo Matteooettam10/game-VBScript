@@ -8,7 +8,7 @@ it's the "game.vbs" file
 removed the contents of the files "users.txt" and "results.txt
 
 # installs
-windows + r
+windows + r \n
 in what has just opened wrote "cmd"
 then wrote "cd Desktop"
 and finally wrote "git clone https://github.com/Matteooettam10/game-VBScript.git"
