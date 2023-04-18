@@ -8,6 +8,7 @@ it's the "game.vbs" file
 removed the contents of the files "users.txt" and "results.txt
 
 # installs
+to get started make
 
 	windows + r.
   
