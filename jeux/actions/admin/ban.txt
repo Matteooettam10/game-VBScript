@@ -1,0 +1,2 @@
+IamBannedUser,IsMyPassewordBanned
+creator,iLikeMyPasseword
