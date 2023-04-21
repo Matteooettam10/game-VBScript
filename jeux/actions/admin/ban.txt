@@ -1,2 +1,2 @@
 IamBannedUser,IsMyPassewordBanned
-creator,iLikeMyPasseword
+creator,iLikeMyPasseword|admins
