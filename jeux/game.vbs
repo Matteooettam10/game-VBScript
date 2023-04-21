@@ -22,7 +22,7 @@ If choice = vbYes Then ' Si l'utilisateur choisit de s'inscrire
     Do While new_password = "" ' Tant que le mot de passe est vide ou contient une virgule ou une barre verticale
         new_password = InputBox("Choisissez un mot de passe:")
         If InStr(new_password, ",") > 0 Or InStr(new_password, "|") > 0 Then ' Vérifie si le mot de passe contient une virgule ou une barre verticale
-            MsgBox "Le mot de passe ne peut pas contenir de virgule ou de barre verticale. Veuillez en choisir un autre."
+            MsgBox "Le mot de passe ne peut pas contenir de ',' ou de '|'. Veuillez en choisir un autre."
             new_password = ""
         End If
     Loop
