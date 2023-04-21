@@ -1,6 +1,7 @@
 Option Explicit
 Dim choice
 Dim shell
+
 ' Demande à l'utilisateur s'il souhaite s'inscrire ou se connecter
 choice = MsgBox("Voulez-vous vous inscrire ? Si non, appuyez sur 'Non' pour vous connecter.", vbYesNo)
 
@@ -8,9 +9,23 @@ If choice = vbYes Then ' Si l'utilisateur choisit de s'inscrire
 
     ' Demande à l'utilisateur de choisir un nom d'utilisateur et un mot de passe
     Dim new_username
+    Do While new_username = "" ' Tant que le mot de passe est vide ou contient une virgule ou une barre verticale
     new_username = InputBox("Choisissez un nom d'utilisateur:")
+    If InStr(new_username, ",") > 0 Or InStr(new_username, "|") > 0 Then ' Vérifie si le mot de passe contient une virgule ou une barre verticale
+            MsgBox "Le nom d'utilisateur ne peut pas contenir de ',' ou de '|'. Veuillez en choisir un autre."
+            new_username = ""
+        End If
+    Loop
     dim new_password
-    new_password = InputBox("Choisissez un mot de passe:")
+    new_password = ""
+
+    Do While new_password = "" ' Tant que le mot de passe est vide ou contient une virgule ou une barre verticale
+        new_password = InputBox("Choisissez un mot de passe:")
+        If InStr(new_password, ",") > 0 Or InStr(new_password, "|") > 0 Then ' Vérifie si le mot de passe contient une virgule ou une barre verticale
+            MsgBox "Le mot de passe ne peut pas contenir de virgule ou de barre verticale. Veuillez en choisir un autre."
+            new_password = ""
+        End If
+    Loop
 
     ' Vérifie si le nom d'utilisateur est déjà utilisé
     Set fso = CreateObject("Scripting.FileSystemObject")
