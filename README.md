@@ -1,16 +1,22 @@
 # game-VBScript
 it's a script in VBScript with the possibility to play chifoumi or make a quiz but as I'm french everything is written in french
 
+# new
+I have created an administration system
+I also added a chifoumis as a game
+And also a random password generator
+
 # to launch the script
 it's the "game.vbs" file
 
 # important 
-removed the contents of the files "users.txt" and "results.txt
+removed the contents of the files "users.txt" and "results.txt and "ban.txt"
+to connect for the first time in admin use the account "admin" and as password "admin|admins" also when you will put user admin their password will finish by "|admins" because otherwise it will mark invalid password
 
 # installs
 to get started make
 
-	windows + r.
+	windows + r
   
 in what has just opened wrote 
 
