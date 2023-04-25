@@ -1,6 +1,6 @@
 Dim choice
 Dim shell
-choice = MsgBox("oui = creer des questions de quiz" & vbCrLf & "non = sois mettre une personne admins  ou lui enleve ou bannir une personne ou la debannir" & vbCrLf & "annuler = pour annule", vbYesNoCancel, "Pannel admin")
+choice = MsgBox("oui = creer des questions de quiz" & vbCrLf & "non = sois mettre une personne admins  ou lui enleve ou bannir une personne ou la debannir" & vbCrLf & "annuler = pour parlez dans de chat", vbYesNoCancel, "Pannel admin")
 
 If choice = vbYes Then
     ' Créer un objet FileSystemObject pour travailler avec des fichiers
@@ -55,5 +55,6 @@ ElseIf choice = vbNo Then
     End If
 
 ElseIf choice = vbCancel Then
-    ' Code exécuté si l'utilisateur choisit "Annuler"
+    Set shell = CreateObject("WScript.Shell")
+    shell.Run "actions\admin\chat.vbs"
 End If
