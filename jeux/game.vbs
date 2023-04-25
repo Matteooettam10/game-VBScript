@@ -9,6 +9,7 @@ If choice = vbYes Then ' Si l'utilisateur choisit de s'inscrire
 
     ' Demande à l'utilisateur de choisir un nom d'utilisateur et un mot de passe
     Dim new_username
+    new_username = ""
     Do While new_username = "" ' Tant que le mot de passe est vide ou contient une virgule ou une barre verticale
     new_username = InputBox("Choisissez un nom d'utilisateur:")
     If InStr(new_username, ",") > 0 Or InStr(new_username, "|") > 0 Then ' Vérifie si le mot de passe contient une virgule ou une barre verticale
@@ -22,7 +23,7 @@ If choice = vbYes Then ' Si l'utilisateur choisit de s'inscrire
     Do While new_password = "" ' Tant que le mot de passe est vide ou contient une virgule ou une barre verticale
         new_password = InputBox("Choisissez un mot de passe:")
         If InStr(new_password, ",") > 0 Or InStr(new_password, "|") > 0 Then ' Vérifie si le mot de passe contient une virgule ou une barre verticale
-            MsgBox "Le mot de passe ne peut pas contenir de ',' ou de '|'. Veuillez en choisir un autre."
+            MsgBox "Le mot de passe ne peut pas contenir de virgule ou de barre verticale. Veuillez en choisir un autre."
             new_password = ""
         End If
     Loop
@@ -92,10 +93,10 @@ file.Close
             Set shell = CreateObject("WScript.Shell")
             shell.Run "actions\admin_actions.vbs"
         Else
-choice = MsgBox("Que voulez-vous faire ?" & vbNewLine & "1. Jouer à pierre-papier-ciseaux" & vbNewLine & "2. Lancer le quiz" & vbNewLine & "3. genere un mot de passe aleatoir donc tres securise", vbExclamation + vbYesNoCancel, "Choix")
+            choice = MsgBox("Que voulez-vous faire ?" & vbNewLine & "1. Jouer à pierre-papier-ciseaux" & vbNewLine & "2. Lancer le quiz" & vbNewLine & "3. Autre", vbExclamation + vbYesNoCancel, "Choix")
 
-If choice = vbYes Then
-    Dim joueur1, joueur2
+            If choice = vbYes Then
+                Dim joueur1, joueur2
     Dim choix_joueur1, choix_joueur2
 
     joueur1 = username
@@ -245,9 +246,12 @@ For j = 0 To i - 1
 Next
 
 MsgBox results
-
-End if
-        ' Demande à l'utilisateur la longueur souhaitée pour le mot de passe
+ElseIf choice = vbCancel Then
+    Dim choiceAutre
+    choiceAutre = MsgBox("que voulez vous faire ?" & vbCrLf & "oui = generateur de mot de passe" & vbCrLf & "non = Le chat", vbYesNo)
+    If choice = vbYes Then
+        ' Code exécuté si l'utilisateur clique sur le bouton "Oui"
+    ' Demande à l'utilisateur la longueur souhaitée pour le mot de passe
 dim password_length
 password_length = InputBox("Entrez la longueur souhaitee pour le mot de passe aleatoire")
 
@@ -262,11 +266,153 @@ For i = 1 To password_length
     random_index = Int(Len(characters) * Rnd + 1)
     password = password & Mid(characters, random_index, 1)
 Next
-
 ' Affiche le mot de passe généré
-MsgBox "Votre mot de passe aleatoire est : " & password
-end if
-    Else
-        MsgBox "Nom d'utilisateur ou mot de passe invalide."
+MsgBox "Votre mot de passe aléatoire est : " & password
+
+dim modifMotDePasse
+modifMotDePasse = MsgBox("Voulez-vous changer votre mot de passe en " & password &" ?", vbYesNo)
+
+If modifMotDePasse = vbYes Then
+    ' Ouvre le fichier texte contenant les noms d'utilisateur et les mots de passe
+    Set fso = CreateObject("Scripting.FileSystemObject")
+    Set file = fso.OpenTextFile("users.txt", 1)
+
+    ' Lit le contenu du fichier texte dans une variable
+    Dim contents
+    contents = file.ReadAll()
+
+    ' Ferme le fichier texte
+    file.Close()
+
+    ' Divise le contenu du fichier texte en lignes
+    Dim lines
+    lines = Split(contents, vbCrLf)
+
+    ' Demande à l'utilisateur de sélectionner un nom d'utilisateur
+    Dim selected_username
+    selected_username = username
+
+    ' Demande à l'utilisateur de saisir le nouveau mot de passe
+    new_password = password
+
+    ' Parcourt les lignes du fichier texte et modifie le mot de passe correspondant à l'utilisateur sélectionné
+    Dim new_contents
+    For Each line In lines
+        If InStr(line, selected_username & ",") = 1 Then
+            line = selected_username & "," & new_password
+        End If
+        new_contents = new_contents & line & vbCrLf
+    Next
+
+    ' Ouvre le fichier texte en mode écriture et écrit le nouveau contenu
+    Set file = fso.OpenTextFile("users.txt", 2)
+    file.Write(new_contents)
+    file.Close()
+
+    ' Affiche un message de confirmation
+    MsgBox "Votre mot de passe a été mis a jour avec succès en " & password & " !"
+
+ElseIf modifMotDePasse = vbNo Then
+    ' annuler
+End If
+
+elseIf choiceAutre = vbNo Then
+
+' Boucle jusqu'à ce que l'utilisateur quitte le programme
+Do While True
+
+    ' Affiche un menu pour l'utilisateur
+    choice = MsgBox("Que souhaitez-vous faire ?" & vbCrLf & vbCrLf & "1 - Voir le chat" & vbCrLf & "2 - Envoyer un message" & vbCrLf & "3 - Quitter", vbQuestion + vbYesNoCancel, "Chat")
+
+    ' Vérifie le choix de l'utilisateur
+    If choice = vbYes Then
+        ' Vérifie si le fichier existe avant de l'ouvrir
+Set fso = CreateObject("Scripting.FileSystemObject")
+dim filePath
+filePath = "chat.txt"
+
+If fso.FileExists(filePath) Then
+' Ouvre le fichier texte contenant le chat
+Set file = fso.OpenTextFile(filePath, 1)
+' Déclaration de la variable qui va contenir les messages
+Dim messages
+messages = ""
+
+' Lit chaque ligne du fichier et extrait les messages
+Do While Not file.AtEndOfStream
+    ' Lit la ligne courante
+    line = file.ReadLine()
+    ' Trouve la position du premier "#" dans la ligne
+    dim pos
+    pos = InStr(line, "#")
+    ' Vérifie si la ligne contient un "#"
+    If pos > 0 Then
+        ' Extrait le message de la ligne en supprimant tout ce qui se trouve après le "#"
+        message = Left(line, pos - 1)
+        ' Ajoute le message à la chaîne de caractères contenant tous les messages et ajoute une ligne vide
+        messages = messages & message & vbCrLf & vbCrLf
     End If
+Loop
+
+' Ferme le fichier texte
+file.Close()
+
+' Affiche les messages dans une boîte de dialogue
+If messages <> "" Then
+    MsgBox messages
+Else
+    MsgBox "Aucun message trouvé dans le fichier chat.txt"
+End If
+Else
+    ' Affiche un message d'erreur si le fichier n'est pas trouvé
+    MsgBox "Le fichier chat.txt est introuvable"
+    End If
+    ElseIf choice = vbNo Then
+        ' Demande à l'utilisateur d'entrer un message
+        Dim message
+        message = InputBox("Entrez votre message :")
+
+        ' Vérifie si l'utilisateur a entré un message
+        If message <> "" Then
+            ' Vérifie si le message contient les caractères "|" ou ":"
+            If InStr(message, "|") > 0 Or InStr(message, ":") > 0 Then
+                ' Affiche un message d'erreur si le message contient les caractères "|" ou ":"
+                MsgBox "Le message ne peut pas contenir les caractères '|' ou ':'"
+            Else
+                ' Ouvre le fichier "chat.txt" en mode ajout
+                Set file = fso.OpenTextFile("chat.txt", 8, True)
+
+                ' Récupère le temps en secondes depuis minuit
+                Dim seconds
+                seconds = Timer()
+
+                ' Génère un code aléatoire en fonction du temps en secondes depuis minuit
+                Dim randomCode
+                Randomize seconds ' Initialise la séquence de nombres aléatoires avec le temps en secondes depuis minuit
+                randomCode = Int(Rnd() * 1000000) ' Génère un nombre aléatoire compris entre 0 et 999999
+                randomCode = Right("000000" & randomCode, 6) ' Formate le nombre aléatoire pour qu'il contienne 6 chiffres
+                ' Ajoute le message à la fin du fichier et ferme le fichier
+                file.WriteLine vbCrLf & username & " : " & message & " #" & randomCode
+                file.Close()
+
+                ' Affiche un message de confirmation
+                MsgBox "Votre message a été enregistré dans le fichier chat.txt"
+            End If
+        Else
+            ' Affiche un message d'erreur si aucun message n'a été entré
+            MsgBox "Aucun message entré"
+        End If
+    Else
+        ' Quitte la boucle
+        Exit Do
+    End If
+
+Loop
+
+End If
+end if
+end if
+Else
+    MsgBox "Nom d'utilisateur ou mot de passe invalide."
+end if
 end if
