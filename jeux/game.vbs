@@ -249,7 +249,7 @@ MsgBox results
 ElseIf choice = vbCancel Then
     Dim choiceAutre
     choiceAutre = MsgBox("que voulez vous faire ?" & vbCrLf & "oui = generateur de mot de passe" & vbCrLf & "non = Le chat", vbYesNo)
-    If choice = vbYes Then
+    If choiceAutre = vbYes Then
         ' Code exécuté si l'utilisateur clique sur le bouton "Oui"
     ' Demande à l'utilisateur la longueur souhaitée pour le mot de passe
 dim password_length
